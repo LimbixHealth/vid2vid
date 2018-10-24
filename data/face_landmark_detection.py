@@ -18,12 +18,14 @@ predictor = dlib.shape_predictor(predictor_path)
 img_paths = sorted(glob.glob(faces_folder_path + '*'))
 for i in range(len(img_paths)):
     f = img_paths[i]
-    print("Processing video: {}".format(f))
+    imgs = sorted(glob.glob(os.path.join(f, '*.jpg')))
+    
+    print("Processing video: {} image count: {}".format(f, len(imgs)))
     save_path = os.path.join(dataset_path, phase + '_keypoints', os.path.basename(f))
     if not os.path.isdir(save_path):
         os.makedirs(save_path)
 
-    for img_name in sorted(glob.glob(os.path.join(f, '*.jpg'))):
+    for img_name in imgs:
         img = io.imread(img_name)
         dets = detector(img, 1)
         if len(dets) > 0:
