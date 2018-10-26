@@ -37,3 +37,6 @@ for i in range(len(img_paths)):
 
             save_name = os.path.join(save_path, os.path.basename(img_name)[:-4] + '.txt')
             np.savetxt(save_name, points, fmt='%d', delimiter=',')
+        else:
+            print('Warning: no face found in image {0}'.format(img_name))
+            
